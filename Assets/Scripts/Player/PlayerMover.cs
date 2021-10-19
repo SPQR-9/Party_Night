@@ -8,7 +8,6 @@ using UnityEngine.Events;
 [RequireComponent(typeof(HumanAnimationController))]
 public class PlayerMover : MonoBehaviour
 {
-    public event UnityAction TargetObjectChanged;
     public event UnityAction TargetObjectReached;
 
     [SerializeField] private Transform _currentPoint;
@@ -99,12 +98,12 @@ public class PlayerMover : MonoBehaviour
                 _movePermission = false;
                 _isTurnOnTargetNeeded = true;
             }
-            return;
         }
-        if (_currentWay != null && _currentWay.Count != 0)
+        else if (_currentWay != null && _currentWay.Count != 0)
         {
             _currentWay.RemoveAt(0);
-            _localTargetPoint = _currentWay[0];
+            if(_currentWay.Count>0)
+                _localTargetPoint = _currentWay[0];
         }
         else
             _animationController.StartIdleAnimation();
@@ -112,15 +111,18 @@ public class PlayerMover : MonoBehaviour
 
     private void TurnOnTargetObject()
     {
-        Vector3 targetDirection = new Vector3(_targetObject.position.x, transform.position.y, _targetObject.position.z) - transform.position;
-        Quaternion rotationOnTarget = Quaternion.LookRotation(targetDirection);
-        if ((int)transform.rotation.eulerAngles.y == (int)rotationOnTarget.eulerAngles.y)
+        if(_targetObject!=null)
         {
-            _isTurnOnTargetNeeded = false;
-            TargetObjectReached?.Invoke();
-            return;
+            Vector3 targetDirection = new Vector3(_targetObject.position.x, transform.position.y, _targetObject.position.z) - transform.position;
+            Quaternion rotationOnTarget = Quaternion.LookRotation(targetDirection);
+            if ((int)transform.rotation.eulerAngles.y == (int)rotationOnTarget.eulerAngles.y)
+            {
+                _isTurnOnTargetNeeded = false;
+                TargetObjectReached?.Invoke();
+                return;
+            }
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotationOnTarget, _rotationSpeed * Time.deltaTime);
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotationOnTarget, _rotationSpeed * Time.deltaTime);
     }
 
     public void AllowToMove()
@@ -147,6 +149,7 @@ public class PlayerMover : MonoBehaviour
 
     public bool TryToSetTargetPoint (Transform targetPoint,Transform targetObject = null)
     {
+        OffOutlinesOnTargetObject();
         if (_movePermission == false)
             return false;
         _targetPoint = targetPoint;
@@ -154,10 +157,7 @@ public class PlayerMover : MonoBehaviour
         if(_localTargetPoint == null)
             return TryFindAWay();  
         else
-        {
-            TargetObjectChanged?.Invoke();
             _isTargetChanges = true;
-        }
         return true;
     }
 
@@ -170,7 +170,7 @@ public class PlayerMover : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Не удалось построить путь до этого объекта");
+            Debug.LogWarning("Не удалось построить путь до этой точки");
             OffOutlinesOnTargetObject();
             _targetObject = null;
             _targetPoint = null;
