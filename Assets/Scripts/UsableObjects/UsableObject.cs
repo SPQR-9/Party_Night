@@ -42,7 +42,7 @@ public class UsableObject : MonoBehaviour
     {
         if (_playerMover.IsStop)
             return;
-        if(_playerMover.TryToSetTargetObject (_nearPoint, transform))
+        if(_playerMover.TryToSetTargetPoint (_nearPoint, transform))
             _outlines.enabled = true;
     }
 

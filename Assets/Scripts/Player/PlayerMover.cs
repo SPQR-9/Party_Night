@@ -22,7 +22,7 @@ public class PlayerMover : MonoBehaviour
     private Transform _localTargetPoint = null;
     private WayAnalizator _wayAnalizator;
     private HumanAnimationController _animationController;
-    private List<int> _currentWayNumbers = null;
+    private List<Transform> _currentWay = null;
     private bool _isTargetChanges = false;
     private bool _movePermission = true;
     private bool _isTurnOnTargetNeeded = false;
@@ -61,7 +61,7 @@ public class PlayerMover : MonoBehaviour
     {
         _isStop = true;
         _animationController.StartIdleAnimation();
-        _currentWayNumbers = null;
+        _currentWay = null;
         OffOutlinesOnTargetObject();
         _targetObject = null;
     }
@@ -91,7 +91,7 @@ public class PlayerMover : MonoBehaviour
         }
         if (_targetPoint != null && _currentPoint.position == _targetPoint.position)
         {
-            _currentWayNumbers = null;
+            _currentWay = null;
             Debug.Log("Игрок дошел до конечной точки");
             _animationController.StartIdleAnimation();
             if(_targetObject!=null)
@@ -101,10 +101,10 @@ public class PlayerMover : MonoBehaviour
             }
             return;
         }
-        if (_currentWayNumbers != null)
+        if (_currentWay != null && _currentWay.Count != 0)
         {
-            _currentWayNumbers.RemoveAt(0);
-            _localTargetPoint = _wayPoints[_currentWayNumbers[0]];
+            _currentWay.RemoveAt(0);
+            _localTargetPoint = _currentWay[0];
         }
         else
             _animationController.StartIdleAnimation();
@@ -126,7 +126,7 @@ public class PlayerMover : MonoBehaviour
     public void AllowToMove()
     {
         _movePermission = true;
-        _currentWayNumbers = null;
+        _currentWay = null;
         _isStop = false;
     }
 
@@ -145,7 +145,7 @@ public class PlayerMover : MonoBehaviour
         _waitingTime = value;
     }
 
-    public bool TryToSetTargetObject (Transform targetPoint,Transform targetObject)
+    public bool TryToSetTargetPoint (Transform targetPoint,Transform targetObject = null)
     {
         if (_movePermission == false)
             return false;
@@ -163,9 +163,9 @@ public class PlayerMover : MonoBehaviour
 
     private bool TryFindAWay()
     {
-        if (_wayAnalizator.TryFindAWay(_currentPoint, _targetPoint, ref _currentWayNumbers))
+        if (_wayAnalizator.TryFindAWay(_currentPoint, _targetPoint, ref _currentWay))
         {
-            _localTargetPoint = _wayPoints[_currentWayNumbers[0]];
+            _localTargetPoint = _currentWay[0];
             return true;
         }
         else

@@ -10,8 +10,8 @@ public class WayAnalizator : MonoBehaviour
 
     private Transform[] _wayPoints;
 
-    private int _targetPointIndex;
-    private int _currentPointIndex;
+    private int _closestTargetPointIndex;
+    private int _closestCurrentPointIndex;
     private List<Way> _ways = new List<Way>();
     private List<Way> _completedWays = new List<Way>();
 
@@ -20,44 +20,54 @@ public class WayAnalizator : MonoBehaviour
         _wayPoints = wayPoints;
     }
 
-    public bool TryFindAWay(Transform currentPoint, Transform targetPoint,ref List<int> completedWay)
+    public bool TryFindAWay(Transform currentPoint, Transform targetPoint,ref List<Transform> completedWay)
     {
-        completedWay = new List<int>();
-        _currentPointIndex = IndexDefinition(currentPoint);
-        _targetPointIndex = IndexDefinition(targetPoint);
-        if (_currentPointIndex == -1 || _targetPointIndex == -1)
-            return false;
-        if (_currentPointIndex == _targetPointIndex)
+        completedWay = new List<Transform>();
+        if (currentPoint == targetPoint || IsPuthBetweenPointAvailble(currentPoint, targetPoint))
         {
-            completedWay = new List<int>();
-            completedWay.Add(_targetPointIndex);
+            completedWay = new List<Transform>();
+            completedWay.Add(targetPoint);
             return true;
         }
-        if(IsTargetPointAvailable())
+        _closestCurrentPointIndex = FindNearestWaypointIndex(currentPoint);
+        _closestTargetPointIndex = FindNearestWaypointIndex(targetPoint);
+        if (_closestCurrentPointIndex == -1 || _closestTargetPointIndex == -1)
+            return false;
+        if(IsWayAvailable())
         {
             FindAllPossibleWays();
+            completedWay.Add(currentPoint);
             completedWay.AddRange(FindShortestWay());
+            completedWay.Add(targetPoint);
             return true;
         }
         completedWay = null;
         return false;
     }
 
-    private int IndexDefinition(Transform point)
+    private int FindNearestWaypointIndex(Transform point)
     {
+        int nearestWaypointIndex = -1;
         for (int i = 0; i < _wayPoints.Length; i++)
         {
-            if (point.position == _wayPoints[i].position)
-                return i;
+            if (IsPuthBetweenPointAvailble(point,_wayPoints[i]))
+            {
+                if (nearestWaypointIndex == -1)
+                {
+                    nearestWaypointIndex = i;
+                    continue;
+                }
+                if(Vector3.Distance(point.position, _wayPoints[nearestWaypointIndex].position) > Vector3.Distance(point.position, _wayPoints[i].position))
+                    nearestWaypointIndex = i;
+            }
         }
-        Debug.LogError("“очка не существует в пуле точек пути");
-        return -1;
+        return nearestWaypointIndex;
     }
 
-    private bool IsTargetPointAvailable()
+    private bool IsWayAvailable()
     {
         List<Transform> availablePoints = new List<Transform>();
-        availablePoints.Add(_wayPoints[_currentPointIndex]);
+        availablePoints.Add(_wayPoints[_closestCurrentPointIndex]);
         bool isAddedNewAvailablePoints = true;
         while (isAddedNewAvailablePoints)
         {
@@ -75,7 +85,7 @@ public class WayAnalizator : MonoBehaviour
                     }
                 }
             }
-            if (availablePoints.Contains(_wayPoints[_targetPointIndex]))
+            if (availablePoints.Contains(_wayPoints[_closestTargetPointIndex]))
                 return true;
         }
         return false;
@@ -84,12 +94,10 @@ public class WayAnalizator : MonoBehaviour
     private void FindAllPossibleWays()
     {
         _ways = new List<Way>();
-        _ways.Add(new Way(_currentPointIndex));
+        _ways.Add(new Way(_closestCurrentPointIndex));
         _completedWays = new List<Way>();
-        int numberOfNewWays;
         do
         {
-            numberOfNewWays = 0;
             List<Way> newWays = new List<Way>();
             for (int i = 0; i < _ways.Count; i++)
             {
@@ -107,8 +115,7 @@ public class WayAnalizator : MonoBehaviour
                         if (IsWayExistsInWays(newWay, newWays))
                             continue;
                         newWays.Add(newWay);
-                        numberOfNewWays++;
-                        if (j == _targetPointIndex)
+                        if (j == _closestTargetPointIndex)
                             _completedWays.Add(newWay);
                     }
                 }
@@ -118,7 +125,7 @@ public class WayAnalizator : MonoBehaviour
         while (_completedWays.Count<_maxCompletedWaysCount && _ways.Count>0);
     }
 
-    private List<int> FindShortestWay()
+    private List<Transform> FindShortestWay()
     {
         float minLenght = 0f;
         int shotersWayIndex = 0;
@@ -140,7 +147,7 @@ public class WayAnalizator : MonoBehaviour
         }
         Debug.Log(ShowWayPointNumbers(_completedWays[shotersWayIndex].PointNumbers));
         Debug.Log("Lenght" + minLenght);
-        return _completedWays[shotersWayIndex].PointNumbers;
+        return _completedWays[shotersWayIndex].GetWayPoints(_wayPoints);
     }
 
     private bool IsPuthBetweenPointAvailble(Transform point1, Transform point2)
@@ -201,6 +208,16 @@ public class Way
     public Way() { }
 
     public List<int> PointNumbers = new List<int>();
+
+    public List<Transform> GetWayPoints(Transform[] wayPoints)
+    {
+        List<Transform> way = new List<Transform>();
+        foreach (var index in PointNumbers)
+        {
+            way.Add(wayPoints[index]);
+        }
+        return way;
+    }
 }
 
 
