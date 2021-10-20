@@ -24,8 +24,10 @@ public class GoalSetterForFreePlayerMovement : MonoBehaviour
             {
                 if(_raycastHit.collider.TryGetComponent(out Floor _))
                 {
+                    Vector3 oldTargetPointPosition = _targetPoint.position;
                     _targetPoint.position = new Vector3(_raycastHit.point.x, _targetPoint.position.y, _raycastHit.point.z);
-                    _playerMover.TryToSetTargetPoint(_targetPoint);
+                    if(!_playerMover.TryToSetTargetPoint(_targetPoint))
+                        _targetPoint.position = oldTargetPointPosition;
                 }
             }
         }

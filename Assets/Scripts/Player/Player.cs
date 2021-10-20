@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(GoalSetterForFreePlayerMovement))]
 public class Player : MonoBehaviour
 {
     private PlayerMover _mover;

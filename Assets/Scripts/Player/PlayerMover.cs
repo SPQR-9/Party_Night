@@ -166,6 +166,7 @@ public class PlayerMover : MonoBehaviour
         if (_wayAnalizator.TryFindAWay(_currentPoint, _targetPoint, ref _currentWay))
         {
             _localTargetPoint = _currentWay[0];
+            Debug.Log("Путь построен");
             return true;
         }
         else
