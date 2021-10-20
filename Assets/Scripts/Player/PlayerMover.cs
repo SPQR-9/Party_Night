@@ -22,7 +22,6 @@ public class PlayerMover : MonoBehaviour
     private WayAnalizator _wayAnalizator;
     private HumanAnimationController _animationController;
     private List<Transform> _currentWay = null;
-    private bool _isTargetChanges = false;
     private bool _movePermission = true;
     private bool _isTurnOnTargetNeeded = false;
     private bool _isStop = false;
@@ -83,12 +82,7 @@ public class PlayerMover : MonoBehaviour
     {
         _currentPoint = _localTargetPoint;
         _localTargetPoint = null;
-        if (_isTargetChanges)
-        {
-            _isTargetChanges = false;
-            TryFindAWay();
-        }
-        if (_targetPoint != null && _currentPoint.position == _targetPoint.position)
+        if (_targetPoint != null && IsPlayerReachedPoint(transform,_targetPoint))
         {
             _currentWay = null;
             Debug.Log("Игрок дошел до конечной точки");
@@ -154,16 +148,12 @@ public class PlayerMover : MonoBehaviour
             return false;
         _targetPoint = targetPoint;
         _targetObject = targetObject;
-        if(_localTargetPoint == null)
-            return TryFindAWay();  
-        else
-            _isTargetChanges = true;
-        return true;
+        return TryFindAWay();  
     }
 
     private bool TryFindAWay()
     {
-        if (_wayAnalizator.TryFindAWay(_currentPoint, _targetPoint, ref _currentWay))
+        if (_wayAnalizator.TryFindAWay(transform, _targetPoint, ref _currentWay))
         {
             _localTargetPoint = _currentWay[0];
             Debug.Log("Путь построен");
