@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMover))]
 public class WayAnalizator : MonoBehaviour
 {
     [SerializeField] private int _maxCompletedWaysCount = 10;

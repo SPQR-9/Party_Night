@@ -27,16 +27,6 @@ public class UsableObject : MonoBehaviour
         _outlines = GetComponent<OutlinesEffect>();
         OffOutlinesEffect();
     }
-/*
-    private void OnEnable()
-    {
-        _playerMover.TargetObjectChanged += OffOutlinesEffect;
-    }
-
-    private void OnDisable()
-    {
-        _playerMover.TargetObjectChanged -= OffOutlinesEffect;
-    }*/
 
     private void OnMouseDown()
     {
