@@ -10,11 +10,9 @@ public class PlayerMover : MonoBehaviour
 {
     public event UnityAction TargetObjectReached;
 
-    [SerializeField] private Transform _currentPoint;
     [SerializeField] private Transform _wayPointsContainer;
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
-    /*    [SerializeField] private float _maximumInaccuracyValue = 0.01f;*/
 
     private Transform[] _wayPoints;
     private Transform _targetPoint;
@@ -35,7 +33,6 @@ public class PlayerMover : MonoBehaviour
         _wayPoints = _wayPointsContainer.GetComponentsInChildren<Transform>();
         _animationController = GetComponent<HumanAnimationController>();
         _wayAnalizator = GetComponent<WayAnalizator>();
-        transform.position = new Vector3(_currentPoint.position.x, _currentPoint.position.y, _currentPoint.position.z);
         _wayAnalizator.Initialize(_wayPoints);
         
     }
@@ -80,7 +77,6 @@ public class PlayerMover : MonoBehaviour
 
     private void DetermineTheDirectionToThePoint()
     {
-        _currentPoint = _localTargetPoint;
         _localTargetPoint = null;
         if (_targetPoint != null && IsPlayerReachedPoint(transform,_targetPoint))
         {
@@ -131,9 +127,6 @@ public class PlayerMover : MonoBehaviour
         return (int)point1.position.x == (int)point2.position.x
             && (int)point1.position.x == (int)point2.position.x
             && (int)point1.position.z == (int)point2.position.z;
-        /*return point1.position.x >= point2.position.x - _maximumInaccuracyValue && point1.position.x <= point2.position.x + _maximumInaccuracyValue
-            && point1.position.y >= point2.position.y - _maximumInaccuracyValue && point1.position.y <= point2.position.y + _maximumInaccuracyValue
-            && point1.position.z >= point2.position.z - _maximumInaccuracyValue && point1.position.z <= point2.position.z + _maximumInaccuracyValue*/;
     }
 
     public void SetWaitingTime(float value)
@@ -156,7 +149,6 @@ public class PlayerMover : MonoBehaviour
         if (_wayAnalizator.TryFindAWay(transform, _targetPoint, ref _currentWay))
         {
             _localTargetPoint = _currentWay[0];
-            Debug.Log("Путь построен");
             return true;
         }
         else
