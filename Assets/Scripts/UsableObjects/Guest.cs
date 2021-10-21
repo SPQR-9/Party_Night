@@ -15,9 +15,8 @@ public class Guest : UsableObject
 
     public override void Inspect()
     {
-        _type = UsableObjectType.DesiredObject;
         base.Inspect();
         _mover.AllowToMove();
-        this.enabled = false;
+        _isUsable = false;
     }
 }

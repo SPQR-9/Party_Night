@@ -19,6 +19,7 @@ public class UsableObject : MonoBehaviour
     private OutlinesEffect _outlines;
 
     protected UsableObjectType _type = UsableObjectType.DesiredObject;
+    protected bool _isUsable = true;
 
     public UsableObjectType Type => _type;
 
@@ -30,10 +31,15 @@ public class UsableObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_playerMover.IsStop)
+        if (_playerMover.IsStop || _isUsable==false)
             return;
         if(_playerMover.TryToSetTargetPoint (_nearPoint, transform))
             _outlines.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        RecordedInteraction?.Invoke();
     }
 
     public virtual void Inspect()

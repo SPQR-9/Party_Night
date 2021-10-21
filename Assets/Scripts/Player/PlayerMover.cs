@@ -63,7 +63,8 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        _animationController.StartWalkAnimation();
+        _animationController.StartRunAnimation();
+        /*_animationController.StartWalkAnimation();*/
         if (IsPlayerReachedPoint(transform, _localTargetPoint))
         {
             DetermineTheDirectionToThePoint();
