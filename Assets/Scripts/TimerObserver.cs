@@ -26,6 +26,11 @@ public class TimerObserver : MonoBehaviour
         _unwantedObjectFinder.NonUwantedObjectsFound -= Win;
     }
 
+    private void Start()
+    {
+        StopTimer();
+    }
+
     private void Update()
     {
         if (_isStop)

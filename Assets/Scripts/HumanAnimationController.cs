@@ -14,6 +14,12 @@ public class HumanAnimationController : MonoBehaviour
     private const string _isIdle = "isIdle";
     private const string _isSits = "isSits";
     private const string _isRun = "isRun";
+    private const string _isDrunkIdle = "isDrunkIdle";
+    private const string _askToLeave = "askToLeave";
+    private const string _shrugging = "shrugging";
+    private const string _collectsFromGround = "collectsFromGround";
+    private const string _reachingOut = "reachingOut";
+    private const string _put = "put";
 
     private void Awake()
     {
@@ -25,6 +31,9 @@ public class HumanAnimationController : MonoBehaviour
                 break;
             case StartAnimationType.Sits:
                 _animator.SetBool(_isSits, true);
+                break;
+            case StartAnimationType.DrunkIdle:
+                _animator.SetBool(_isDrunkIdle, true);
                 break;
         }   
     }
@@ -48,7 +57,29 @@ public class HumanAnimationController : MonoBehaviour
 
     public void StartInspectAnimation(UsableObjectType usableObjectType)
     {
-        Debug.LogWarning(usableObjectType);
+        switch (usableObjectType)
+        {
+            case UsableObjectType.DesiredObject:
+                _animator.SetTrigger(_shrugging);
+                break;
+            case UsableObjectType.BrokenFurniture:
+                _animator.SetTrigger(_reachingOut);
+                break;
+            case UsableObjectType.Guest:
+                _animator.SetTrigger(_askToLeave);
+                break;
+            case UsableObjectType.TrashOnGround:
+                _animator.SetTrigger(_put);
+                break;
+            case UsableObjectType.BrokenFurnitureOnGroud:
+                _animator.SetTrigger(_collectsFromGround);
+                break;
+            case UsableObjectType.TrashOnWall:
+                _animator.SetTrigger(_reachingOut);
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -58,4 +89,5 @@ public enum StartAnimationType
 {
     Idle,
     Sits,
+    DrunkIdle
 }

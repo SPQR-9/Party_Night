@@ -39,6 +39,7 @@ public class UsableObject : MonoBehaviour
 
     private void OnDisable()
     {
+        _type = UsableObjectType.DesiredObject;
         RecordedInteraction?.Invoke();
     }
 
@@ -70,7 +71,9 @@ public enum UsableObjectType
 {
     DesiredObject,
     BrokenFurniture,
+    BrokenFurnitureOnGroud,
     Guest,
-    Trash
+    TrashOnWall,
+    TrashOnGround
 }
 

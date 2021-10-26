@@ -30,9 +30,11 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
         _targetObject = _mover.GetTargetObject();
-        //
         if(_targetObject.TryGetComponent(out UsableObject usableObject))
+        {
+            _animation.StartInspectAnimation(usableObject.Type);
             StartCoroutine(InspectObjectAfterAWhile(usableObject));
+        }
         else
         {
             Debug.LogWarning("Не получен usableObject");

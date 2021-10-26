@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Trash : UsableObject
 {
+    [SerializeField] private bool _isOnGround;
     private void Awake()
     {
-        _type = UsableObjectType.Trash;
+        _type = UsableObjectType.TrashOnWall;
+        if(_isOnGround)
+            _type = UsableObjectType.TrashOnGround;
     }
 
     public override void Inspect()

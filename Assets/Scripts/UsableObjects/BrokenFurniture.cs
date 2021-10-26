@@ -5,10 +5,13 @@ using UnityEngine;
 public class BrokenFurniture : UsableObject
 {
     [SerializeField] private GameObject _renovatedFurniture;
+    [SerializeField] private bool _isOnGround;
 
     private void Awake()
     {
         _type = UsableObjectType.BrokenFurniture;
+        if (_isOnGround)
+            _type = UsableObjectType.BrokenFurnitureOnGroud;
         _renovatedFurniture.SetActive(false);
     }
 
