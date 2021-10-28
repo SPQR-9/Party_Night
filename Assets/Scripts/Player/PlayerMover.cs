@@ -34,7 +34,6 @@ public class PlayerMover : MonoBehaviour
         _animationController = GetComponent<HumanAnimationController>();
         _wayAnalizator = GetComponent<WayAnalizator>();
         _wayAnalizator.Initialize(_wayPoints);
-        StopMoving();
     }
 
     private void Update()

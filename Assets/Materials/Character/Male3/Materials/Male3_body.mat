@@ -39,14 +39,14 @@ Material:
     - _Emission: 1
     - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 1
+    - _Outline: 6
     - _RampSmooth: 0.1
     - _RampThreshold: 0.5
     - _TexLod: 5
-    - _ZSmooth: -2
+    - _ZSmooth: 0.35
     m_Colors:
     - _Color: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
     - _HColor: {r: 0.785, g: 0.785, b: 0.785, a: 1}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.99215686, g: 0.4392157, b: 0.078431375, a: 1}
     - _SColor: {r: 0.195, g: 0.195, b: 0.195, a: 1}
   m_BuildTextureStacks: []

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[RequireComponent(typeof(OutlinesEffect))]
+[RequireComponent(typeof(ClickOutlinesEffect))]
 
 public class UsableObject : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class UsableObject : MonoBehaviour
     [SerializeField] private float _inspectionTime = 2f;
     [SerializeField] private float _waitingTime = 0f;
 
-    private OutlinesEffect _outlines;
+    private ClickOutlinesEffect _outlines;
 
     protected UsableObjectType _type = UsableObjectType.DesiredObject;
     protected bool _isUsable = true;
@@ -25,7 +25,7 @@ public class UsableObject : MonoBehaviour
 
     protected void Start()
     {
-        _outlines = GetComponent<OutlinesEffect>();
+        _outlines = GetComponent<ClickOutlinesEffect>();
         OffOutlinesEffect();
     }
 
