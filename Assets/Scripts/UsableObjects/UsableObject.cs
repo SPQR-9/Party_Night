@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[RequireComponent(typeof(ClickOutlinesEffect))]
+[RequireComponent(typeof(OutlinesEffect))]
 
 public class UsableObject : MonoBehaviour
 {
@@ -13,10 +13,10 @@ public class UsableObject : MonoBehaviour
 
     [SerializeField] private Transform _nearPoint;
     [SerializeField] private PlayerMover _playerMover;
-    [SerializeField] private float _inspectionTime = 2f;
+    [SerializeField] private float _inspectionTime = 1f;
     [SerializeField] private float _waitingTime = 0f;
 
-    private ClickOutlinesEffect _outlines;
+    private OutlinesEffect _outlines;
 
     protected UsableObjectType _type = UsableObjectType.DesiredObject;
     protected bool _isUsable = true;
@@ -25,7 +25,7 @@ public class UsableObject : MonoBehaviour
 
     protected void Start()
     {
-        _outlines = GetComponent<ClickOutlinesEffect>();
+        _outlines = GetComponent<OutlinesEffect>();
         OffOutlinesEffect();
     }
 

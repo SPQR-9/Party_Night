@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ClickOutlinesEffect : MonoBehaviour
+public class OutlinesEffect : MonoBehaviour
 {
     
     public Color OutlineColor
@@ -64,7 +64,7 @@ public class ClickOutlinesEffect : MonoBehaviour
     {
         foreach (var renderer in _renderers)
         {
-            if (renderer.TryGetComponent(out ParticleSystem _))
+            if (renderer.TryGetComponent(out ParticleSystem _) || renderer.TryGetComponent(out SpriteRenderer _))
                 continue;
             var materials = renderer.sharedMaterials.ToList();
             materials.Add(_outlineMaskMaterial);

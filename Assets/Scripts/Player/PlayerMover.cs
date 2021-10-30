@@ -22,7 +22,7 @@ public class PlayerMover : MonoBehaviour
     private List<Transform> _currentWay = null;
     private bool _movePermission = true;
     private bool _isTurnOnTargetNeeded = false;
-    private bool _isStop = false;
+    private bool _isStop = true;
     private Transform _targetObject = null;
     private float _waitingTime = 0f;
 
