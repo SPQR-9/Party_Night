@@ -13,6 +13,9 @@ public class HumanAnimationController : MonoBehaviour
     private const string _isWalk = "isWalk";
     private const string _isIdle = "isIdle";
     private const string _isSits = "isSits";
+    private const string _isSitsOnToilet = "isSitsOnToilet";
+    private const string _isDanceFem = "isDanceFem";
+    private const string _isDanceMan = "isDanceMan";
     private const string _isRun = "isRun";
     private const string _isDrunkIdle = "isDrunkIdle";
     private const string _askToLeave = "askToLeave";
@@ -20,6 +23,7 @@ public class HumanAnimationController : MonoBehaviour
     private const string _collectsFromGround = "collectsFromGround";
     private const string _reachingOut = "reachingOut";
     private const string _put = "put";
+    private const string _kiss = "kiss";
 
     private void Awake()
     {
@@ -34,6 +38,15 @@ public class HumanAnimationController : MonoBehaviour
                 break;
             case StartAnimationType.DrunkIdle:
                 _animator.SetBool(_isDrunkIdle, true);
+                break;
+            case StartAnimationType.SitsOnToilet:
+                _animator.SetBool(_isSitsOnToilet, true);
+                break;
+            case StartAnimationType.DanceFem:
+                _animator.SetBool(_isDanceFem, true);
+                break;
+            case StartAnimationType.DanceMan:
+                _animator.SetBool(_isDanceMan, true);
                 break;
         }   
     }
@@ -62,9 +75,6 @@ public class HumanAnimationController : MonoBehaviour
             case UsableObjectType.DesiredObject:
                 _animator.SetTrigger(_shrugging);
                 break;
-            case UsableObjectType.BrokenFurniture:
-                _animator.SetTrigger(_reachingOut);
-                break;
             case UsableObjectType.Guest:
                 _animator.SetTrigger(_askToLeave);
                 break;
@@ -74,8 +84,11 @@ public class HumanAnimationController : MonoBehaviour
             case UsableObjectType.BrokenFurnitureOnGroud:
                 _animator.SetTrigger(_collectsFromGround);
                 break;
-            case UsableObjectType.TrashOnWall:
+            case UsableObjectType.ObjectOnWall:
                 _animator.SetTrigger(_reachingOut);
+                break;
+            case UsableObjectType.GuestFem:
+                _animator.SetTrigger(_kiss);
                 break;
             default:
                 break;
@@ -89,5 +102,8 @@ public enum StartAnimationType
 {
     Idle,
     Sits,
-    DrunkIdle
+    SitsOnToilet,
+    DrunkIdle,
+    DanceFem,
+    DanceMan
 }

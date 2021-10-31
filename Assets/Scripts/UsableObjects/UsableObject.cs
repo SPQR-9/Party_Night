@@ -10,16 +10,17 @@ using UnityEngine.Events;
 public class UsableObject : MonoBehaviour
 {
     public event UnityAction RecordedInteraction;
+    public UnityEvent ActivateAfterInspect;
 
     [SerializeField] private Transform _nearPoint;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private float _inspectionTime = 1f;
     [SerializeField] private float _waitingTime = 0f;
+    [SerializeField] protected UsableObjectType _type = UsableObjectType.DesiredObject;
+    [SerializeField] protected bool _isUsable = true;
 
     private OutlinesEffect _outlines;
 
-    protected UsableObjectType _type = UsableObjectType.DesiredObject;
-    protected bool _isUsable = true;
 
     public UsableObjectType Type => _type;
 
@@ -39,14 +40,15 @@ public class UsableObject : MonoBehaviour
 
     private void OnDisable()
     {
-        _type = UsableObjectType.DesiredObject;
+        ReturnTypeToDefaultType();
         RecordedInteraction?.Invoke();
     }
 
     public virtual void Inspect()
     {
-        OffOutlinesEffect();
+        ActivateAfterInspect?.Invoke();
         RecordedInteraction?.Invoke();
+        OffOutlinesEffect();
     }
 
     public float GetInspectionTime()
@@ -63,6 +65,21 @@ public class UsableObject : MonoBehaviour
     {
         _outlines.enabled = false;
     }
+
+    public void DisallowUseOf()
+    {
+        _isUsable = false;
+    }
+
+    public void AllowUse()
+    {
+        _isUsable = true;
+    }
+
+    public void ReturnTypeToDefaultType()
+    {
+        _type = UsableObjectType.DesiredObject;
+    }
 }
 
 [Serializable]
@@ -70,10 +87,10 @@ public class UsableObject : MonoBehaviour
 public enum UsableObjectType
 {
     DesiredObject,
-    BrokenFurniture,
     BrokenFurnitureOnGroud,
     Guest,
-    TrashOnWall,
-    TrashOnGround
+    ObjectOnWall,
+    TrashOnGround,
+    GuestFem
 }
 

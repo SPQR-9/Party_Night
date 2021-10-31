@@ -36,7 +36,7 @@ public class GuestMover : MonoBehaviour
     {
         if (_way.Count > 0)
         {
-            _animationController.StartWalkAnimation();
+            _animationController.StartRunAnimation();
             _localTargetPoint = _way[0];
             if (IsReachedPoint(transform, _localTargetPoint))
                 _way.RemoveAt(0);

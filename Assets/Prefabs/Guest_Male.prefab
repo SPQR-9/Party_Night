@@ -725,8 +725,6 @@ GameObject:
   - component: {fileID: 3856507006166518474}
   - component: {fileID: 3856507006166518473}
   - component: {fileID: 3856507006166518472}
-  - component: {fileID: 3856507006166518471}
-  - component: {fileID: 3856507006166518470}
   - component: {fileID: 3856507006166518475}
   m_Layer: 0
   m_Name: Guest_Male
@@ -803,38 +801,6 @@ MonoBehaviour:
   _idleTime: 0.5
   _speed: 6
   _rotationSpeed: 5
---- !u!114 &3856507006166518471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3856507006166518469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d938a8d7dddcc284eb0db6f1f3dccd8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _outlineWidth: 6
-  _bakeKeys: []
-  _bakeValues: []
---- !u!114 &3856507006166518470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3856507006166518469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce421e72da792d043aaaa820e85ced15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nearPoint: {fileID: 0}
-  _playerMover: {fileID: 0}
-  _inspectionTime: 2
-  _waitingTime: 1.5
 --- !u!65 &3856507006166518475
 BoxCollider:
   m_ObjectHideFlags: 0

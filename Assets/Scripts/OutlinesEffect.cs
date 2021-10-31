@@ -37,7 +37,7 @@ public class OutlinesEffect : MonoBehaviour
         public List<Vector3> data;
     }
     [SerializeField] private Color _outlineColor = Color.yellow;
-    [SerializeField, Range(0f, 10f)] private float _outlineWidth = 8f;
+    [SerializeField, Range(0f, 10f)] private float _outlineWidth = 6f;
     [SerializeField, HideInInspector] private List<Mesh> _bakeKeys = new List<Mesh>();
     [SerializeField, HideInInspector] private List<ListVector3> _bakeValues = new List<ListVector3>();
 
