@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sofa Feet Rest 01_PTX
       objectReference: {fileID: 0}
+    - target: {fileID: 5958324579945379242, guid: 2ed259b076016fc479d408b1eaefc489, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eab7048e02ece004fb784425f98452db, type: 2}
     - target: {fileID: 8995860503869502309, guid: 2ed259b076016fc479d408b1eaefc489, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1537,7 +1541,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.43734425, g: 0.7924528, b: 0.501184, a: 1}
+  m_BackGroundColor: {r: 0.2392157, g: 0.32156864, b: 0.6392157, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1942,7 +1946,7 @@ PrefabInstance:
     - target: {fileID: 23000012337175900, guid: f266cbc0b1e72924f909c3ea2b746949, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d561ed9fbcd55614f9d8662bf9be6ae5, type: 2}
+      objectReference: {fileID: 2100000, guid: eab7048e02ece004fb784425f98452db, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f266cbc0b1e72924f909c3ea2b746949, type: 3}
 --- !u!1001 &582938213
@@ -2506,7 +2510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725637814}
   m_LocalRotation: {x: 0, y: -0.23844866, z: 0, w: 0.97115517}
-  m_LocalPosition: {x: -1.31, y: 0, z: 22.71}
+  m_LocalPosition: {x: -1.5887837, y: -0.09999943, z: 22.026821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2060970773}
@@ -3578,6 +3582,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.00047
       objectReference: {fileID: 0}
+    - target: {fileID: 23000011444486616, guid: 21e32de74bee7044fbd8655ea8eeda74, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 250d753e229a4414bb101f86684533c3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e32de74bee7044fbd8655ea8eeda74, type: 3}
 --- !u!4 &974084592 stripped
@@ -7744,7 +7752,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060970772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34, y: 0.097, z: -2}
+  m_LocalPosition: {x: 1.81, y: 0.172, z: -1.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 725637815}
@@ -8023,7 +8031,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84a7eb62cad52304db994662b2bb5232, type: 2}
+  - {fileID: 2100000, guid: feb72b007d8a9af4ea2ca2c2ac3711f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8163,7 +8171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84a7eb62cad52304db994662b2bb5232, type: 2}
+  - {fileID: 2100000, guid: feb72b007d8a9af4ea2ca2c2ac3711f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9248,7 +9256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c48080ccdf320424681ac330a5b35cd6, type: 2}
+  - {fileID: 2100000, guid: eab7048e02ece004fb784425f98452db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
