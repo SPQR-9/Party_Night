@@ -42,6 +42,8 @@ public class TimeObserver : MonoBehaviour
 
     private void Win()
     {
+        if (_time <= 0)
+            return;
         _acivateAfterWin?.Invoke();
         _isStop = true;
     }
